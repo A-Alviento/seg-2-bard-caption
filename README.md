@@ -6,10 +6,10 @@ This projects implements Segment Anything Model (SAM), Blip-2 and Bard to provid
 
 Note: This project was tested and ran on an M1 Macbook. Python=3.8 was used.
 
-First, install segment anything:
+First, clone repository:
 ```
-git clone https://github.com/facebookresearch/segment-anything
-cd segment-anything
+git clone https://github.com/A-Alviento/seg-2-bard-caption
+cd seg-2-bard-caption
 pip install -e
 ```
 
