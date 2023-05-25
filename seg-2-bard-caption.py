@@ -7,7 +7,7 @@ from segment_anything import sam_model_registry, SamAutomaticMaskGenerator, SamP
 from PIL import Image
 from bardapi import Bard
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+dev = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 # Define a function to display the segmentations (annotations)
@@ -55,7 +55,7 @@ def get_mask(img):
     
     # load the model
     sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
-    sam.to(device=device)
+    sam.to(device=dev)
 
     # create the generator
     mask_generator = SamAutomaticMaskGenerator(sam)
@@ -96,7 +96,7 @@ num_masks = len(new_masks)
 
 # loads BLIP caption base model, with finetuned checkpoints on MSCOCO captioning dataset.
 # this also loads the associated image processors
-model, vis_processors, _ = load_model_and_preprocess(name="blip_caption", model_type="base_coco", is_eval=True, device=device)
+model, vis_processors, _ = load_model_and_preprocess(name="blip_caption", model_type="base_coco", is_eval=True, device=dev)
 
 # create a list to store the coordinates and captions
 capt = [[] for _ in range(num_masks)]
@@ -105,13 +105,13 @@ for i in range(len(new_masks)):
     masked_image = img * new_masks[i]['segmentation'][:,:,np.newaxis] + (1 - new_masks[i]['segmentation'][:,:,np.newaxis]) * 255
     masked_image = np.uint8(masked_image)
     masked_image = Image.fromarray(masked_image)    
-    masked_image = vis_processors["eval"](masked_image).unsqueeze(0).to(device)
+    masked_image = vis_processors["eval"](masked_image).unsqueeze(0).to(dev)
 
     capt[i].append(new_masks[i]['bbox'])
     capt[i].append(model.generate({"image": masked_image}))
 
 # full image caption
-full_img = vis_processors["eval"](Image.fromarray(img)).unsqueeze(0).to(device)
+full_img = vis_processors["eval"](Image.fromarray(img)).unsqueeze(0).to(dev)
 full_img_capt = model.generate({"image": full_img})
 
 
@@ -127,7 +127,7 @@ combined_masks_normal = (combined_masks / combined_masks.max() * 255).astype(np.
 bg = img * combined_masks[:,:,np.newaxis] + (1 - combined_masks[:,:,np.newaxis]) * 255
 bg = np.uint8(bg)
 bg = Image.fromarray(bg)
-bg = vis_processors["eval"](bg).unsqueeze(0).to(device)
+bg = vis_processors["eval"](bg).unsqueeze(0).to(dev)
 bg_capt = model.generate({"image": bg}) 
 
 
