@@ -1,17 +1,20 @@
 # Seg2Bard-Caption
 
-This projects implements Segment Anything Model (SAM), Blip-2 and Bard to provide detailed and accurate descriptions of images
+This project combines the capabilities of the Segment Anything Model (SAM), Blip-2, and Bard to generate accurate and detailed descriptions of images.
 
 ## Getting Started
-Note: This project was tested and ran on an M1 Macbook. Python=3.8 was used. <br><br>
-### Prerequisites and Installations
-1. First, clone repository:
+
+This project has been tested and run on an M1 Macbook using Python 3.8. Please ensure your system meets these requirements before proceeding.
+
+### Prerequisites and Installation
+
+1. Start by cloning the repository:
 ```
 git clone https://github.com/A-Alviento/seg-2-bard-caption
 cd seg-2-bard-caption
-pip install -e
+pip install -e .
 ```
-2. Next, install the following:
+2. Next, install the required packages:
 ```
 pip install torch torchvision torchaudio
 pip install opencv-python pycocotools matplotlib onnxruntime onnx
@@ -19,27 +22,26 @@ pip install eva-decord
 pip install salesforce-lavis
 pip install bardapi
 ```
-Note: 
-- `pip install torch torchvision torchaudio` is for apple silicon. Refer to https://pytorch.org/get-started/locally/ for compatible versions
-- `pip install eva-decord` is for apple silicon. Don't run otherwise <br><br>
+*Note*: 
+- For Apple Silicon machines, use `pip install torch torchvision torchaudio`. For other machines, refer to the [PyTorch official guide](https://pytorch.org/get-started/locally/) for compatible versions.
+- The `pip install eva-decord` command is specific to Apple Silicon machines. Do not run this command on other types of machines.
 
-3. Finally: 
-- Visit https://bard.google.com/
-- F12 for console
-- Session -> Application -> Cookies -> Copy the value of __Secure-1PSID cookie
+3. To finish up, visit [Bard](https://bard.google.com/), press F12 to open the console, navigate to Session -> Application -> Cookies, and copy the value of the __Secure-1PSID cookie.
 
-## Running the program
-1. Simply run:
+## Running the Program
+
+1. Run the main Python script:
 ```
 python seg-2-bard-caption.py
 ```
-2. Enter path to desired image
-3. Enter Bard Key
+2. When prompted, enter the path to the image you want to describe.
+3. Enter your Bard Key when prompted.
 
 ## Acknowledgements
-https://github.com/facebookresearch/segment-anything/blob/main/README.md
-https://github.com/ttengwang/Caption-Anything
-https://github.com/dsdanielpark/Bard-API
-https://bard.google.com/
-https://huggingface.co/docs/transformers/main/model_doc/blip-2
 
+This project was inspired and made possible by the following sources:
+- [Segment Anything Model (SAM) by Facebook Research](https://github.com/facebookresearch/segment-anything/blob/main/README.md)
+- [Caption Anything Project](https://github.com/ttengwang/Caption-Anything)
+- [Bard API Repository](https://github.com/dsdanielpark/Bard-API)
+- [Bard by Google](https://bard.google.com/)
+- [Blip-2 Documentation on Hugging Face](https://huggingface.co/docs/transformers/main/model_doc/blip-2)
