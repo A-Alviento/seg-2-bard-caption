@@ -6,8 +6,21 @@ import cv2
 from segment_anything import sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
 from PIL import Image
 from bardapi import Bard
+from lavis.models import load_model_and_preprocess
 
 dev = "cuda" if torch.cuda.is_available() else "cpu"
+# get the checkpoint path for the model
+sam_checkpoint = "sam_vit_b_01ec64.pth"
+# get the model type
+model_type = "vit_b"
+
+# load the model
+sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
+sam.to(device=dev)
+
+# create the generator
+mask_generator = SamAutomaticMaskGenerator(sam)
+
 
 
 # Define a function to display the segmentations (annotations)
@@ -41,27 +54,15 @@ def show_anns(anns):
 
 # define a function to get the image, and its height and width
 def get_image(path):
-    image = cv2.imread(path)
+    image = cv2.imread(str(path))
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     h, w, _ = image.shape
     return image, h, w
 
 # define a function to get the mask
 def get_mask(img):
-    # get the checkpoint path for the model
-    sam_checkpoint = "sam_vit_b_01ec64.pth"
-    # get the model type
-    model_type = "vit_b"
-    
-    # load the model
-    sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
-    sam.to(device=dev)
-
-    # create the generator
-    mask_generator = SamAutomaticMaskGenerator(sam)
-
     # generate the mask
-    masks = mask_generator(img)
+    masks = mask_generator.generate(img)
     return masks
 
 # define a function to filter the mask based on the area
