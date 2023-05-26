@@ -1,4 +1,4 @@
-# seg-2-bard-caption
+# Seg2Bard-Caption
 
 This projects implements Segment Anything Model (SAM), Blip-2 and Bard to provide detailed and accurate descriptions of images
 
