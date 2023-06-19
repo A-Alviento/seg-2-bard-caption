@@ -6,36 +6,11 @@ This project combines the capabilities of the Segment Anything Model (SAM), Blip
 
 This project has been tested and run on an M1 Macbook using Python 3.8. Please ensure your system meets these requirements before proceeding.
 
-### Prerequisites and Installation
-
 1. Start by cloning the repository:
 ```
 git clone https://github.com/A-Alviento/seg-2-bard-caption
-cd seg-2-bard-caption
-pip install -e .
 ```
-2. Next, install the required packages:
-```
-pip install torch torchvision torchaudio
-pip install opencv-python pycocotools matplotlib onnxruntime onnx
-pip install eva-decord
-pip install salesforce-lavis
-pip install bardapi
-```
-*Note*: 
-- For Apple Silicon machines, use `pip install torch torchvision torchaudio`. For other machines, refer to the [PyTorch official guide](https://pytorch.org/get-started/locally/) for compatible versions.
-- The `pip install eva-decord` command is specific to Apple Silicon machines. Do not run this command on other types of machines.
-
-3. To finish up, visit [Bard](https://bard.google.com/), press F12 to open the console, navigate to Session -> Application -> Cookies, and copy the value of the __Secure-1PSID cookie.
-
-## Running the Program
-
-1. Run the main Python script:
-```
-python seg-2-bard-caption.py
-```
-2. When prompted, enter the path to the image you want to describe.
-3. Enter your Bard Key when prompted.
+2. Next, open up `seg-2-bard-caption.ipynb` on vscode and follow the installations and subsequent instructions
 
 ## Acknowledgements
 
